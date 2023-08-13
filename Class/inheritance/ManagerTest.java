@@ -2,7 +2,7 @@ package inheitance;
 
 
 public class ManagerTest {
-  public static void main(String[] ards) {
+  public static void main(String[] args) {
     // construct a Manager object
     var boss = new Manager("Carl Cracker", 80000, 1987, 12, 15);
     boss.setBonus(5000);
