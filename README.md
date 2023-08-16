@@ -15,6 +15,9 @@ Keywords: ** extends **, ** autoboxing **;
 - static Integer valueOf(String s)
 - static Integer valueOf(String s, int radix)
 
+### java.text.NumberFormat
+- Number parse(String s)
+
 
 ### java.lang.Enum<E>
 - static Enum valueOf(Class enumClass, String name) 
@@ -23,5 +26,17 @@ Keywords: ** extends **, ** autoboxing **;
 - int compareTo(E other)
 
 ## Reflection
+** Reflection library **, ** reflective **;
+
+### java.lang.Class
+- static Class forName(String className)
+- Constructor getConstructor(Class... parameterTypes)
+
+### java.lang.reflect.Constructor
+- Object newInstance(Object... params)
+
+### java.lang.Throwable
+- void printStackTrace()
+
 
 
