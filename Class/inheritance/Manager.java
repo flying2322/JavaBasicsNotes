@@ -11,10 +11,10 @@ public class Manager extends Employee {
   public double getSalary()
   {
     double baseSalary = super.getSalary();
-    return baseSalary + bouns;
+    return baseSalary + bonus;
   }
 
-  public void setBouns(double b) {
+  public void setBonus(double b) {
     bonus = b;
   }
 }
