@@ -38,6 +38,12 @@ import java.time.*;
     salary += raise;
   }
 
+  /**
+   * Compares employee by salary
+   * @param other another Employee Objects
+   * @return a negative value if this employee has a lower salary than
+   * otherObject, o if the salaryes are the same, a positive value otheswise
+   */
   public int compareTo(Employee other)
   {
     return Double.compare(salary, other.salary);
