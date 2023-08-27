@@ -40,4 +40,8 @@ Keywords: ** extends **, ** autoboxing **;
 
 
 
+## Proxy
+proxy/ProxyTest.java successful!!!
+
+
 

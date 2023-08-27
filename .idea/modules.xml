@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/java-core-I.iml" filepath="$PROJECT_DIR$/java-core-I.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/JavaCoreNote.iml" filepath="$PROJECT_DIR$/JavaCoreNote.iml" />
->>>>>>> refs/remotes/origin/main
+      <module fileurl="file://$PROJECT_DIR$/.idea/JavaCoreNote.iml" filepath="$PROJECT_DIR$/.idea/JavaCoreNote.iml" />
     </modules>
   </component>
 </project>
