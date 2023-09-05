@@ -36,12 +36,23 @@ Keywords: ** extends **, ** autoboxing **;
 - Object newInstance(Object... params)
 
 ### java.lang.Throwable
-- void printStackTrace()
+- void printStackTrace() 
 
 
 
 ## Proxy
-proxy/ProxyTest.java successful!!!
+proxy/ProxyTest.java ** successful!!! **
 
+## Logging
+### LoggingImageeViewer
+awt, swing, util and io are imported. 
 
+util.logging.*;
 
+awt.event.*;
+
+### JLabel
+~~awt example cannot compile for ** cannot find symbol JLabel in awt."
+After check, which only exist in~~
+**Shame of typos!!!**
+                                                                                                    
