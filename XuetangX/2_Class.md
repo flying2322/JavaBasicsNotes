@@ -1,4 +1,5 @@
 # 2. Class and Object类与对象
+In this chapter, Class and object is discussed. Mainly about what is OOP and why this is efficient for developing.
 ## 2.1 特性
 - 封装
 - 继承
@@ -61,4 +62,36 @@ public class ClassVariableTester {
 ### 方法成员
 类的方法 & 实例的方法
 
+# 2.3 类的重载
+**使用this重载构造方法**
 
+Example：
+```java
+public BankAcount() {
+    this("", 999999, 0.0f);
+}
+public BankAcount(String initName, int initAcountNumber) {
+    this(initName, initAcountNumbker, 0.0f);
+}
+public BankAcount(String initName, int initAcountNumber, float initBalance) {
+    ownerName = initName;
+    accountNumber = initAcountNuber;
+    balance = initBalance;
+}
+```
+final变量的初始化
+- 实例变量和类型变量被声明为final
+- final实例变量可以在类中定义时给出初始值，或者在每个构造方法结束之前完成初始化；
+- final类变量必须在声明的同时初始化
+
+
+对象自动回收
+- 无用对象
+    - 离开了作用域的对象
+    - 无引用指向的对象
+- Java运行时系统通过垃圾收集器周期性地释放无用对象所使用的内存。
+- Java运行时系统会在对对象进行自动垃圾回收前，自动调用对象的finalize（）方法。
+
+DicimalFormat类
+- DecimalFormat类在java.text包中
+- 在toString()方法中使用DecimalFormat类的实例方法format对数据进行格式化。
