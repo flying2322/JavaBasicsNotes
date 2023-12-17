@@ -29,8 +29,59 @@ git@github.com:flying2322/JavaCoreNote.git
 
 # 范型
 类型作为参数（类，方法）
+Example: General class
+```java
+class GeneralType <Type> {
+    Type object;
+    public GeneralType(Type object){
+        this.object = object;
+    }
+    public Type getObj(){
+        return object;
+    }
+}
 
+class ShowType {
+    public void show (GeneralType<?> o) {
+        System.out.printIn(o.getObj().getClass().getName());
+    }
+}
 
+```
+
+Example: General methods
+```java
+class GeneralMethod {
+    <Type> void printClassName(Type object) {
+        System.out.println(object.getClass().getName());
+    }
+}
+public class Test {
+    public static void main(Stirng[] args) {
+        GenenalMethod  gm = new GeneralMethod();
+        gm.printClassName("hello");
+        gm.printClassName(3);
+        gm.printClassName(3.0f);
+        gm.printClassNmae(3.0);
+    }
+}
+```
+ ## 通配符
+```java
+public class Test {
+    public static void main(String args[]) {
+        ShowType st = new ShowType();
+        GeneralType<Integer> i = new GeneralType<Integer>(2);
+        GeneralType<String> s = new GeneralType<String>("hello");
+        st.show(i);
+        st.show(s);
+    }
+}
+```
+
+Output:
+java.lang.Integer
+java.lang.String
 
 
 
