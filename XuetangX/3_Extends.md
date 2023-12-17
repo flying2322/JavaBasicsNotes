@@ -1,5 +1,5 @@
 # 1. Intro about extends of Java Class
-
+git@github.com:flying2322/JavaCoreNote.git
 - 继承abstract class：隶属关系 超类->子类
 
 - virtual functions：虚方法
@@ -23,6 +23,12 @@
 
 
 
+
+# abstract class
+抽象类和抽象方法
+
+# 范型
+类型作为参数（类，方法）
 
 
 
