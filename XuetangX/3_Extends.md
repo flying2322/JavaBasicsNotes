@@ -83,6 +83,30 @@ Output:
 java.lang.Integer
 java.lang.String
 
+# General Type with restrictions
+"Type" **extends** Interface/super class
+
+```java
+class GeneralType<Type extends Number> {
+    Type object;
+    public GeneralType(Type object) {
+        this.object = object;
+    }
+    public Type getObj() {
+        return object;
+    }
+}
+public class Test {
+    public static void main(String args[]){
+        GeneralType<Integer> i = new GeneralType<Integer> (2);
+        // GeneralType<String> s = new GeneralType<String> ("hello");
+        // inlegal, T can only be the Class Number or the subclass of Number
+    }
+}
+```
+
+# The combination of Classes
+put the exist Class to new Class
 
 
 
