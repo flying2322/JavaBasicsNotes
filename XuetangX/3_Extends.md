@@ -9,7 +9,7 @@ git@github.com:flying2322/JavaCoreNote.git
 
 - 组合：部件组装的思想，已有类的对象作为成员变量。
 
-# 继承
+# 3.1 继承
 - 已有类定义新类的方法，新类拥有已有类的所有功能
 - Java只支持类的单继承，每个子类只能拥有一个直接超类。
 -  超类是所有子类的公共属性及方法的集合，子类则是超类的特殊化
@@ -22,12 +22,15 @@ git@github.com:flying2322/JavaCoreNote.git
 - 其内包含着超类所有变量和方法
 
 
+# 3.2 Object Class
 
 
-# abstract class
+# 3.3 Final Class and Finalize method
+
+# 3.4 abstract class
 抽象类和抽象方法
 
-# 范型
+# 3.5 范型
 类型作为参数（类，方法）
 Example: General class
 ```java
@@ -66,6 +69,9 @@ public class Test {
     }
 }
 ```
+
+# 3.6 The combination of Class
+
  ## 通配符
 ```java
 public class Test {
@@ -110,7 +116,12 @@ put the exist Class to new Class
 
 
 
+# 3.7 Summary
 
+1. Talk abou the re-use mechanism of CLASS, can be [extends] or [combination]s of class
+2. The main methods the **Object** have.
+3. Final class and finalize methods
+4. Abstract class and abstract methods.
 
 
 
