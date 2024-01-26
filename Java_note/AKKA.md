@@ -186,3 +186,133 @@ app {
 在这个例子中，`ConfigExample` 类加载默认的配置文件，并获取了 `app.name` 和 `app.maxConnections` 的值。
 
 请确保你的项目结构和依赖配置正确，以便成功使用 Typesafe Config。
+
+# docker compose confign
+```docker
+version: '3'
+services:
+    nova-ess-p:
+            #image: 172.20.8.203/hairounova/nova-ess-p:4.0.0.20
+        image: 172.20.8.203/hairounova-test/nova-ess-p:merge_23.3.1.0_230918173810
+        container_name: nova-ess-p
+        network_mode: bridge
+        restart: always
+        extra_hosts:
+            - "nova-iwms-core:172.18.81.106"
+            - "nova-iwms-station:172.18.81.106"
+            - "nova-iwms-adapter:172.18.81.106"
+
+            - "nova-ess-p:172.18.81.106"
+            - "nova-algo-mc:172.18.81.106"
+            - "nova-algo-pp:172.18.81.106"
+            - "nova-algo-charging:172.18.81.106"
+            - "nova-linklayer:172.18.81.106"
+            - "nova-datax-gateway:172.18.81.106"
+
+            - "nova-kafka:172.18.81.106"
+            - "nova-redis:172.18.81.106"
+
+            - "nova-algo:172.18.81.106"
+            - "mc.algo.hr.com:172.18.81.106"
+            - "pp.algo.hr.com:172.18.81.106"
+            - "charge.algo.hr.com:172.18.81.106"
+            - "op.algo.hr.com:172.18.81.106"
+
+        environment:
+            - TZ=Asia/Shanghai
+            - JAVA_OPTS= -javaagent:/agent/normandy-agent.jar -Dapp.name=nova-ess-p -Dreport.step=5 -Dpushgateway.address=172.18.81.106:5299 -Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=172.18.81.106 -Dcom.sun.management.jmxremote.port=4765 -Dcom.sun.management.jmxremote.rmi.port=4765 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false  -Xms4G -Xmx4G -XX:NewRatio=1 -XX:SurvivorRatio=6 -XX:MetaspaceSize=512m -XX:MaxMetaspaceSize=512m -XX:MaxDirectMemorySize=1g -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:CMSMaxAbortablePrecleanTime=5000 -XX:+CMSClassUnloadingEnabled -XX:CMSInitiatingOccupancyFraction=80 -XX:+UseCMSInitiatingOccupancyOnly -XX:+ExplicitGCInvokesConcurrent -Dsun.rmi.dgc.client.gcInterval=72000000 -XX:ParallelGCThreads=4
+            - ESS_REDIS_IP=nova-redis
+            - ESS_REDIS_PORT=6379
+            - KAFKA_SERVERS=nova-kafka:9092
+            - ESS_EVENT_DIR=/hairou/data/
+            #- PLAY_HTTP_ROUTER=facade.Routes
+            #- ESS_LL_ENABLE=on
+            - ESS_SLAVE=off
+            - ESS_EVENT_BACKUP=off
+
+            - PERSIST_LOCAL_HOST=127.0.0.1
+            - PERSIST_LOCAL_PORT=9901
+
+            - PERSIST_REMOTE_HOST1=127.0.0.1
+            - PERSIST_REMOTE_PORT1=9901
+
+
+            # 生产环境
+            #- ESS_TEST_ONLY=on
+            #- MOCK_SCAN_RESULT=on
+            #- ESS_LL_PRODUCER=com.hairoutech.ess.actor.robot.kubot.comm.EssLinkLayerProducerActor
+
+            # 测试环境
+            - ESS_TEST_ONLY=on
+            - MOCK_SCAN_RESULT=on
+            - ESS_LL_PRODUCER=com.hairoutech.ess.actor.robot.kubot.mock.EssMockLlActor$$CommandRoute
+
+            - SWAGGER_UI_DIR=/hairou/public/swagger-ui/
+            - CONVEYOR_TYPE=modbus
+            - WMS_CORE_URL=http://nova-iwms-core
+            - WMS_STATION_URL=http://nova-iwms-station
+
+            - ESS_SECURITY=off
+
+        ports:
+            - 9000:9000
+            - 9901:9901
+            # JMX 使用，请勿修改
+            - 4765:4765
+            - 8886:8886
+            - 8888:8888
+            - 9877:9877
+
+        healthcheck:
+          test: ["CMD", "curl", "-f", "http://172.18.81.106:9000/actor/query"]
+          interval: 2m
+          timeout: 10s
+          retries: 3
+
+        entrypoint: sh -c 'rm  -f /hairou/RUNNING_PID;exec ess-gateway'
+
+        volumes:
+            - /etc/localtime:/etc/localtime
+            - /usr/share/zoneinfo:/usr/share/zoneinfo
+            - /data/ess_data/data/:/hairou/data
+            - /data/ess_data/map/:/hairou/map
+            - /data/ess_data/ptl/:/hairou/ptl
+            - ./key/:/hairou/key
+            - /haiq_logs/nova-ess-p/:/hairou/logs
+            - /data/app/normandy-5101/lib/normandy-agent.jar:/agent/normandy-agent.jar
+
+```
+
+# setiprestart.sh /data/workspace/
+```shell
+#!/bin/bash
+cur_dir=$(cd $(dirname $0);pwd)
+IP=$1
+normandy=$2
+name=`hostname` 
+cat > /tmp/daemon.json << "EOFFF"
+{
+    "log-opts": {
+       "max-size": "50m",
+       "max-file": "5"
+    },
+    "registry-mirrors": ["https://zvqzjr1b.mirror.aliyuncs.com"],
+    "insecure-registries":["172.20.8.205:5000","172.20.8.203","172.18.81.65:5000"]
+}
+EOFFF
+echo hairou|sudo -S mv /tmp/daemon.json /etc/docker
+echo hairou|sudo -S systemctl restart docker
+rm -f /data/workspace/nginx-www/www/index.html
+echo hairou|sudo -S sed -i -e 's/export HOST_IP=.*/export HOST_IP='$IP'/g' /etc/profile
+echo hairou|sudo -S /bin/bash -c 'echo "nameserver 114.114.114.114" >> /etc/resolv.conf;chown -R hairou:hairou ess_data/ imhs_data/'
+mysql -uroot -proot -e "create user nacos@'"${IP}"' identified  with mysql_native_password  by 'NAC0S@mysql';"
+mysql -uroot -proot -e "grant all on nova_config.* to nacos@'"${IP}"'"
+sed -i 's/172.18.81.70/'$IP'/g' /data/app/normandy-5101/conf/project_config.json
+source /etc/profile
+cd /data/app
+wget http://172.20.8.10:6205/haiq-devops/$normandy
+unzip -o $normandy
+chmod +x /data/app/normandy-5101/bin/*
+echo hairou|sudo -S chown hairou:hairou /haiq_logs/
+/data/app/normandy-5101/bin/server.sh restart
+```
