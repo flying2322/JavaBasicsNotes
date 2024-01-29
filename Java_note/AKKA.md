@@ -283,6 +283,51 @@ services:
 
 ```
 
+# JAVA_OPTS
+
+这是一个Java应用程序的启动配置，通过设置`JAVA_OPTS`环境变量来传递。下面是这个配置中各个参数的含义：
+
+1. **`-javaagent:/agent/normandy-agent.jar`**:
+   - 启用Java代理，用于监控和收集性能数据。
+
+2. **`-Dapp.name=nova-ess-p`**:
+   - 设置应用程序的名称为"nova-ess-p"，这个信息可能会用于标识不同的应用实例。
+
+3. **`-Dreport.step=5`**:
+   - 设置报告的步长为5，具体含义可能与应用程序的业务逻辑相关。
+
+4. **`-Dpushgateway.address=172.18.81.106:5299`**:
+   - 指定Pushgateway的地址和端口，可能用于将监控数据推送到Prometheus等监控系统。
+
+5. **JMX设置**:
+   - `-Dcom.sun.management.jmxremote`: 启用JMX。
+   - `-Djava.rmi.server.hostname=172.18.81.106`: 指定RMI服务的主机名。
+   - `-Dcom.sun.management.jmxremote.port=4765`: 指定JMX远程端口。
+   - `-Dcom.sun.management.jmxremote.rmi.port=4765`: 指定RMI端口。
+   - `-Dcom.sun.management.jmxremote.authenticate=false`: 禁用JMX身份验证。
+   - `-Dcom.sun.management.jmxremote.ssl=false`: 禁用JMX的SSL。
+
+6. **堆内存配置**:
+   - `-Xms4G`: 设置初始堆大小为4GB。
+   - `-Xmx4G`: 设置最大堆大小为4GB。
+   - `-XX:NewRatio=1`: 设置新生代与老年代的堆大小比例。
+
+7. **垃圾回收相关配置**:
+   - `-XX:+DisableExplicitGC`: 禁用显式的垃圾回收。
+   - `-XX:+UseConcMarkSweepGC`: 使用CMS（Concurrent Mark-Sweep）垃圾回收器。
+   - `-XX:CMSMaxAbortablePrecleanTime=5000`: 设置CMS回收器最大可中止的预清理时间。
+   - `-XX:+CMSClassUnloadingEnabled`: 启用CMS回收器中类的卸载。
+   - `-XX:CMSInitiatingOccupancyFraction=80`: CMS触发垃圾回收的阈值。
+   - `-XX:+UseCMSInitiatingOccupancyOnly`: 仅在达到CMS触发阈值时执行垃圾回收。
+
+8. **其他配置**:
+   - `-XX:+ExplicitGCInvokesConcurrent`: 显式的GC调用并行执行。
+   - `-Dsun.rmi.dgc.client.gcInterval=72000000`: 指定远程对象的垃圾回收间隔时间。
+   - `-XX:ParallelGCThreads=4`: 设置并行垃圾回收的线程数。
+
+总体而言，这个配置文件包含了一系列的JVM参数，用于调整Java应用程序的性能、内存管理和监控设置。配置中的具体数值可能需要根据应用程序的需求进行调整。
+
+
 # setiprestart.sh /data/workspace/
 ```shell
 #!/bin/bash
@@ -316,3 +361,4 @@ chmod +x /data/app/normandy-5101/bin/*
 echo hairou|sudo -S chown hairou:hairou /haiq_logs/
 /data/app/normandy-5101/bin/server.sh restart
 ```
+
