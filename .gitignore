@@ -1,1 +1,3 @@
 *.class
+ProgramDesignBasics/
+!A/Search/*.cpp
