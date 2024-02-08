@@ -1,2 +1,8 @@
 *.class
+<<<<<<< HEAD
 .idea
+=======
+ProgramDesignBasics/
+!A/Search/*.cpp
+!A/*.md
+>>>>>>> xuetang
