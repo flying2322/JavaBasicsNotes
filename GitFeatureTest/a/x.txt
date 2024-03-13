@@ -1,1 +1,6 @@
+This is conflict head
 some text a here to learn merge commands
+thanks to Torvoals
+
+some text here to show whether they can merge unconflictly.
+So clear their comment is 
