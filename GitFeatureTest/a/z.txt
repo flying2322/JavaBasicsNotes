@@ -12,3 +12,12 @@ this is the line should be ignored
 
 
 all marks here
+
+this is a new test try to merage testa to testc there should have some conflicts
+
+here
+
+
+and 
+there
+
