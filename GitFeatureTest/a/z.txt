@@ -1,0 +1,14 @@
+this new file is to test the charry pick feature of git
+
+
+
+this is the line needed 
+
+
+
+
+this is the line should be ignored
+
+
+
+all marks here
