@@ -12,3 +12,8 @@ this is the line should be ignored
 
 
 all marks here
+
+
+this is a new submit, but I wish branch testa merge the above commit only. 
+This is a mark about the second submit of branch testc
+Charry pick
