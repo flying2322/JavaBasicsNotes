@@ -1,7 +1,19 @@
-```protobuf
-syntax = "proto3";
+# equipment model
+**Key Module**
+这是一篇有关使用protobuf的语法规范。
+- 定义基本整数类型：整数(**Int64** **int32**)
+- 数据集合**repeated**
 
-package proto.equipment.model;
+
+
+
+
+
+
+```protobuf
+syntax = "proto3"; //用于标记版本
+
+package proto.equipment.model; // 表明文件位置，java可以直接定位文件和识别编译
 
 option java_package = "com.hairoutech.proto.equipment.model";
 option java_outer_classname = "EquipmentModel";
