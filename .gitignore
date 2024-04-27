@@ -1,1 +1,4 @@
 *.class
+ProgramDesignBasics/
+!A/Search/*.cpp
+!A/*.md
