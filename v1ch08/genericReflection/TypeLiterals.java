@@ -10,10 +10,10 @@ class TypeLiteral<T>
 
     public TypeLiteral()
     {
-        Type parenType = getClass().getGenericSuperclass();
-        if (parenType instanceof ParameterizedType)
+        Type parentType = getClass().getGenericSuperclass();
+        if (parentType instanceof ParameterizedType)
         {
-            type = ((ParameterizedType) parentTYpe).getActualTYpeArguments()[0];
+            type = ((ParameterizedType) parentType).getActualTypeArguments()[0];
         }
         else
             throw new UnsupportedOperationException(
@@ -69,5 +69,27 @@ public class TypeLiterals
             strings = new ArrayList<>();
             strings.add("Hello"); strings.add("World");
         }
+    }
+
+    private static <T> String join(String separator, ArrayList<T> elements)
+    {
+        var result = new StringBuilder();
+        for(T e:elements)
+        {
+            if(result.length() > 0) result.append(separator);
+            result.append(e.toString());
+        }
+        return result.toString();
+    }
+
+    public static void main(String[] args) throws Exception
+    {
+        var formatter = new Formatter();
+        formatter.forType(new TypeLiteral<ArrayList<Integer>>(){},
+                lst -> join(" ", lst));
+        formatter.forType(new TypeLiteral<ArrayList<Character>>(){},
+                lst -> "\"" + join("", lst) + "\"");
+        System.out.println(formatter.formatFields(new Sample()));
+
     }
 }
