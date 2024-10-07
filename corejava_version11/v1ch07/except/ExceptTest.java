@@ -33,7 +33,11 @@ public class ExceptTest
             () -> System.getProperty("woozle").toString());
 
       performAction("No such file",
-            () -> new Scanner(Paths.get("woozle.txt"), StandardCharsets.UTF_8).next());
+            () -> new Scanner(Paths.get("woozle.txt"), StandardCharsets.UTF_8).next()); // Mind the format about Scanner.next()
+               /*
+                  next() 方法读取一个以空格、换行符、制表符（tab）或其他空白字符分隔的 字符串。
+                  每次调用 next() 都会跳过前面的空白字符，并返回下一个完整的单词（字符串），直到遇到下一个空白字符为止
+               */
    }
 
    /**
@@ -55,3 +59,4 @@ public class ExceptTest
       }
    }
 }
+
