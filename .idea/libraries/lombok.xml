@@ -1,9 +1,14 @@
 <component name="libraryTable">
   <library name="lombok">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Dev/tools/lombok.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../tools/lombok.jar!/" />
+      <root url="file://$PROJECT_DIR$/../tools/javafx-sdk-23/lib" />
     </CLASSES>
     <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/../tools/javafx-sdk-23/lib" />
+    </NATIVE>
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../tools/javafx-sdk-23/lib" recursive="false" />
   </library>
 </component>
