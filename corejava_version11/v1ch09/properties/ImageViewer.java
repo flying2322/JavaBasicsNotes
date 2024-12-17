@@ -18,7 +18,7 @@ public class ImageViewer
    {
       EventQueue.invokeLater(() -> {
          var frame = new ImageViewerFrame();
-         frame.setTitle("ImageViewer");
+         frame.setTitle("ImageViewer modified by Dominic");
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          frame.setVisible(true);
       });
